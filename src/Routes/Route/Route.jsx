@@ -9,46 +9,58 @@ import Login from "../../Pages/Login/Login";
 import Register from "../../Pages/Register/Register";
 import Chackout from "../../Components/Chackout/Chackout";
 import Buy_Now from "../../Components/Buy_Now/Buy_Now";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <MainPage />,
     errorElement: <ErrorPage />,
     children: [
       {
-        path: '/',
+        path: "/",
         element: <Home />,
       },
       {
-        path: '/about',
-        element: <About />
+        path: "/about",
+        element: <About />,
       },
       {
         path: "/contact",
-        element: <Contact />
+        element: <Contact />,
       },
 
       {
         path: "/register",
-        element: <Register />
+        element: <Register />,
       },
       {
         path: "/login",
-        element: <Login />
+        element: <Login />,
       },
       {
-        path: "/Chackout",
-        element: <Chackout></Chackout>
+        path: "/Chackout/:_id",
+        element: (
+          <PrivateRoute>
+            <Chackout />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_DataHost}/data/${params._id}`),
       },
+
       {
         path: "/shipping",
-        element: <Buy_Now></Buy_Now>
+        element: <Buy_Now></Buy_Now>,
       },
-    ]
+    ],
   },
   {
-    path: 'dashboard',
-    element: <DashboardLayout />
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
   },
-])
+]);

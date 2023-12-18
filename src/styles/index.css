@@ -41,3 +41,8 @@ body {
   }
 
 
+.rounded-full-ex{
+  width: 40px;
+  height: 20px;
+  border-radius: 100%;
+}

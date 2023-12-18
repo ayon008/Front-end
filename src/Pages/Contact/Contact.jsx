@@ -5,7 +5,6 @@ import { decrement, increment } from '../../GlobalRedux/Features/Counter/counter
 const Contact = () => {
   const count = useSelector((state) => state?.counter?.value)
   const dispatch = useDispatch()
-  // console.log({ count, dispatch })
   return (
     <>
       <div className='flex items-center justify-center gap-4 my-10'>
